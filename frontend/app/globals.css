@@ -2,83 +2,47 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 17%;
-
-    /* Primary Colors - Deep Blue */
-    --primary: 215 28% 17%;
-    --primary-foreground: 0 0% 100%;
-
-    /* Electric Blue for CTAs */
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    /* Success - Emerald Green */
-    --success: 145 63% 42%;
-    --success-foreground: 0 0% 100%;
-
-    /* Warning - Amber Yellow */
-    --warning: 45 93% 63%;
-    --warning-foreground: 0 0% 17%;
-
-    /* Destructive - Bright Red */
-    --destructive: 0 65% 63%;
-    --destructive-foreground: 0 0% 100%;
-
-    /* Neutral Colors */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 17%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 17%;
-
-    --secondary: 210 14% 97%;
-    --secondary-foreground: 0 0% 17%;
-
-    --muted: 210 14% 97%;
-    --muted-foreground: 215 16% 47%;
-
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 60%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 0 0% 17%;
+    /* Lyzo AI Dark Theme - Always Dark */
+    --background: 0 0% 0%;
     --foreground: 0 0% 100%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 17%;
+    /* Purple & Pink Gradients */
+    --primary: 280 80% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --accent: 217 91% 60%;
+    --accent: 320 75% 55%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 145 63% 42%;
+    /* Success - Emerald */
+    --success: 145 63% 49%;
     --success-foreground: 0 0% 100%;
 
+    /* Warning - Amber */
     --warning: 45 93% 63%;
-    --warning-foreground: 0 0% 17%;
+    --warning-foreground: 0 0% 0%;
 
-    --destructive: 0 65% 63%;
+    /* Destructive - Red */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --card: 215 28% 17%;
+    /* Dark Cards */
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 215 28% 17%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 100%;
 
-    --secondary: 217 19% 27%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 217 19% 27%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --border: 217 19% 27%;
-    --input: 217 19% 27%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 280 80% 60%;
+
+    --radius: 0.75rem;
   }
 }
 
@@ -86,8 +50,29 @@
   * {
     border-color: hsl(var(--border));
   }
+  
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Gradient utilities */
+  .gradient-purple-pink {
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 }

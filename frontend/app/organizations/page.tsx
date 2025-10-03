@@ -256,296 +256,258 @@ export default function OrganizationsPage() {
   const getRoleBadgeColor = (role: string) => {
     switch (role) {
       case 'admin':
-        return 'bg-red-500/10 text-red-500 border-red-500/20';
+        return 'bg-red-500/20 text-red-400 border-red-500/30';
       case 'developer':
-        return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+        return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
       case 'viewer':
-        return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
       default:
-        return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     }
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">Organizations</h1>
-          <p className="text-muted-foreground">
-            Manage your teams and collaborators
-          </p>
-        </div>
-        <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              Create Organization
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create New Organization</DialogTitle>
-              <DialogDescription>
-                Set up a new organization to collaborate with your team
-              </DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="org-name">Organization Name</Label>
-                <Input
-                  id="org-name"
-                  placeholder="My Company"
-                  value={newOrgName}
-                  onChange={(e) => setNewOrgName(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="org-email">Billing Email</Label>
-                <Input
-                  id="org-email"
-                  type="email"
-                  placeholder="billing@company.com"
-                  value={newOrgEmail}
-                  onChange={(e) => setNewOrgEmail(e.target.value)}
-                />
-              </div>
-              <Button onClick={createOrganization} className="w-full">
+    <div className="min-h-screen bg-black text-white">
+      <div className="container mx-auto p-6 space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Organizations
+            </h1>
+            <p className="text-gray-400 mt-2">
+              Manage your teams and collaborators
+            </p>
+          </div>
+          <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold">
+                <Plus className="mr-2 h-4 w-4" />
                 Create Organization
               </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="md:col-span-1 space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Your Organizations</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {organizations.map((org) => (
-                <button
-                  key={org.id}
-                  onClick={() => setSelectedOrg(org)}
-                  className={`w-full text-left p-3 rounded-lg transition-colors ${
-                    selectedOrg?.id === org.id
-                      ? 'bg-primary text-primary-foreground'
-                      : 'hover:bg-muted'
-                  }`}
-                >
-                  <div className="font-medium">{org.name}</div>
-                  <div className="text-sm opacity-80 flex items-center gap-2 mt-1">
-                    <Users className="h-3 w-3" />
-                    {org.member_count} members · {org.project_count} projects
-                  </div>
-                </button>
-              ))}
-            </CardContent>
-          </Card>
+            </DialogTrigger>
+            <DialogContent className="bg-gray-900 border-gray-800">
+              <DialogHeader>
+                <DialogTitle className="text-white">Create New Organization</DialogTitle>
+                <DialogDescription className="text-gray-400">
+                  Set up a new organization to collaborate with your team
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="org-name" className="text-white">Organization Name</Label>
+                  <Input
+                    id="org-name"
+                    placeholder="My Company"
+                    value={newOrgName}
+                    onChange={(e) => setNewOrgName(e.target.value)}
+                    className="bg-black border-gray-800 text-white"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="org-email" className="text-white">Billing Email</Label>
+                  <Input
+                    id="org-email"
+                    type="email"
+                    placeholder="billing@company.com"
+                    value={newOrgEmail}
+                    onChange={(e) => setNewOrgEmail(e.target.value)}
+                    className="bg-black border-gray-800 text-white"
+                  />
+                </div>
+                <Button onClick={createOrganization} className="w-full bg-gradient-to-r from-purple-500 to-pink-500">
+                  Create Organization
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
-        <div className="md:col-span-2 space-y-6">
-          {selectedOrg && (
-            <>
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>{selectedOrg.name}</CardTitle>
-                      <CardDescription>
-                        {selectedOrg.billing_email}
-                      </CardDescription>
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="md:col-span-1 space-y-4">
+            <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-800">
+              <CardHeader>
+                <CardTitle className="text-white">Your Organizations</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {organizations.map((org) => (
+                  <button
+                    key={org.id}
+                    onClick={() => setSelectedOrg(org)}
+                    className={`w-full text-left p-4 rounded-xl transition-all duration-300 ${
+                      selectedOrg?.id === org.id
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
+                        : 'bg-black/40 hover:bg-black/60 border border-gray-800'
+                    }`}
+                  >
+                    <div className="font-semibold">{org.name}</div>
+                    <div className="text-sm opacity-80 flex items-center gap-2 mt-1">
+                      <Users className="h-3 w-3" />
+                      {org.member_count} members · {org.project_count} projects
                     </div>
-                    <Button variant="outline" size="sm">
-                      <Settings className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <div className="text-2xl font-bold">
-                        {selectedOrg.member_count}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Members
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold">
-                        {selectedOrg.project_count}
-                      </div>
-                      <div className="text-sm text-muted-foreground">
-                        Projects
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold">{invites.length}</div>
-                      <div className="text-sm text-muted-foreground">
-                        Pending Invites
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </button>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
 
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>Team Members</CardTitle>
-                    <Dialog
-                      open={inviteDialogOpen}
-                      onOpenChange={setInviteDialogOpen}
-                    >
-                      <DialogTrigger asChild>
-                        <Button size="sm">
-                          <Mail className="mr-2 h-4 w-4" />
-                          Invite Member
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Invite Team Member</DialogTitle>
-                          <DialogDescription>
-                            Send an invitation to join your organization
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="invite-email">Email Address</Label>
-                            <Input
-                              id="invite-email"
-                              type="email"
-                              placeholder="colleague@company.com"
-                              value={inviteEmail}
-                              onChange={(e) => setInviteEmail(e.target.value)}
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="invite-role">Role</Label>
-                            <Select
-                              value={inviteRole}
-                              onValueChange={setInviteRole}
-                            >
-                              <SelectTrigger>
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="admin">Admin</SelectItem>
-                                <SelectItem value="developer">
-                                  Developer
-                                </SelectItem>
-                                <SelectItem value="viewer">Viewer</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <Button onClick={sendInvite} className="w-full">
-                            Send Invitation
-                          </Button>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {members.map((member) => (
-                      <div
-                        key={member.id}
-                        className="flex items-center justify-between p-3 border rounded-lg"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                            <Users className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <div className="font-medium">{member.username}</div>
-                            <div className="text-sm text-muted-foreground">
-                              {member.email}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Select
-                            value={member.role}
-                            onValueChange={(value) =>
-                              updateMemberRole(member.id, member.user_id, value)
-                            }
-                          >
-                            <SelectTrigger className="w-32">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="admin">
-                                <div className="flex items-center gap-2">
-                                  <Shield className="h-3 w-3" />
-                                  Admin
-                                </div>
-                              </SelectItem>
-                              <SelectItem value="developer">
-                                Developer
-                              </SelectItem>
-                              <SelectItem value="viewer">Viewer</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => removeMember(member.user_id)}
-                          >
-                            <Trash2 className="h-4 w-4 text-destructive" />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {invites.length > 0 && (
-                <Card>
+          <div className="md:col-span-2 space-y-6">
+            {selectedOrg && (
+              <>
+                <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-800">
                   <CardHeader>
-                    <CardTitle>Pending Invitations</CardTitle>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-white text-2xl">{selectedOrg.name}</CardTitle>
+                        <CardDescription className="text-gray-400">
+                          {selectedOrg.billing_email}
+                        </CardDescription>
+                      </div>
+                      <Button variant="outline" size="sm" className="border-gray-700 hover:border-purple-500">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-4 bg-black/40 rounded-xl">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                          {selectedOrg.member_count}
+                        </div>
+                        <div className="text-sm text-gray-400 mt-1">
+                          Members
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-black/40 rounded-xl">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                          {selectedOrg.project_count}
+                        </div>
+                        <div className="text-sm text-gray-400 mt-1">
+                          Projects
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-black/40 rounded-xl">
+                        <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                          {invites.length}
+                        </div>
+                        <div className="text-sm text-gray-400 mt-1">
+                          Pending Invites
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-800">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-white text-2xl">Team Members</CardTitle>
+                      <Dialog
+                        open={inviteDialogOpen}
+                        onOpenChange={setInviteDialogOpen}
+                      >
+                        <DialogTrigger asChild>
+                          <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                            <Mail className="mr-2 h-4 w-4" />
+                            Invite Member
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="bg-gray-900 border-gray-800">
+                          <DialogHeader>
+                            <DialogTitle className="text-white">Invite Team Member</DialogTitle>
+                            <DialogDescription className="text-gray-400">
+                              Send an invitation to join your organization
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="invite-email" className="text-white">Email Address</Label>
+                              <Input
+                                id="invite-email"
+                                type="email"
+                                placeholder="colleague@company.com"
+                                value={inviteEmail}
+                                onChange={(e) => setInviteEmail(e.target.value)}
+                                className="bg-black border-gray-800 text-white"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="invite-role" className="text-white">Role</Label>
+                              <Select
+                                value={inviteRole}
+                                onValueChange={setInviteRole}
+                              >
+                                <SelectTrigger className="bg-black border-gray-800 text-white">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent className="bg-gray-900 border-gray-800">
+                                  <SelectItem value="admin">Admin</SelectItem>
+                                  <SelectItem value="developer">Developer</SelectItem>
+                                  <SelectItem value="viewer">Viewer</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <Button onClick={sendInvite} className="w-full bg-gradient-to-r from-purple-500 to-pink-500">
+                              Send Invitation
+                            </Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {invites.map((invite) => (
+                      {members.map((member) => (
                         <div
-                          key={invite.id}
-                          className="flex items-center justify-between p-3 border rounded-lg"
+                          key={member.id}
+                          className="flex items-center justify-between p-4 bg-black/40 border border-gray-800 rounded-xl hover:border-purple-500/50 transition-all"
                         >
                           <div className="flex items-center gap-3">
-                            <Mail className="h-5 w-5 text-muted-foreground" />
+                            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                              <Users className="h-5 w-5 text-white" />
+                            </div>
                             <div>
-                              <div className="font-medium">{invite.email}</div>
-                              <div className="text-sm text-muted-foreground">
-                                Invited as {invite.role} ·{' '}
-                                {new Date(invite.created_at).toLocaleDateString()}
+                              <div className="font-medium text-white">{member.username}</div>
+                              <div className="text-sm text-gray-400">
+                                {member.email}
                               </div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Badge
-                              variant="outline"
-                              className={getRoleBadgeColor(invite.role)}
+                            <Select
+                              value={member.role}
+                              onValueChange={(value) =>
+                                updateMemberRole(member.id, member.user_id, value)
+                              }
                             >
-                              {invite.role}
-                            </Badge>
+                              <SelectTrigger className="w-32 bg-black border-gray-800">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent className="bg-gray-900 border-gray-800">
+                                <SelectItem value="admin">
+                                  <div className="flex items-center gap-2">
+                                    <Shield className="h-3 w-3" />
+                                    Admin
+                                  </div>
+                                </SelectItem>
+                                <SelectItem value="developer">Developer</SelectItem>
+                                <SelectItem value="viewer">Viewer</SelectItem>
+                              </SelectContent>
+                            </Select>
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => revokeInvite(invite.id)}
+                              onClick={() => removeMember(member.user_id)}
+                              className="hover:bg-red-500/20 hover:text-red-400"
                             >
-                              <Trash2 className="h-4 w-4 text-destructive" />
+                              <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>
@@ -553,9 +515,54 @@ export default function OrganizationsPage() {
                     </div>
                   </CardContent>
                 </Card>
-              )}
-            </>
-          )}
+
+                {invites.length > 0 && (
+                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 border-gray-800">
+                    <CardHeader>
+                      <CardTitle className="text-white text-2xl">Pending Invitations</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {invites.map((invite) => (
+                          <div
+                            key={invite.id}
+                            className="flex items-center justify-between p-4 bg-black/40 border border-gray-800 rounded-xl"
+                          >
+                            <div className="flex items-center gap-3">
+                              <Mail className="h-5 w-5 text-purple-400" />
+                              <div>
+                                <div className="font-medium text-white">{invite.email}</div>
+                                <div className="text-sm text-gray-400">
+                                  Invited as {invite.role} ·{' '}
+                                  {new Date(invite.created_at).toLocaleDateString()}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Badge
+                                variant="outline"
+                                className={getRoleBadgeColor(invite.role)}
+                              >
+                                {invite.role}
+                              </Badge>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => revokeInvite(invite.id)}
+                                className="hover:bg-red-500/20 hover:text-red-400"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
