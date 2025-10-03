@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 17%;
+
+    /* Primary Colors - Deep Blue */
+    --primary: 215 28% 17%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Electric Blue for CTAs */
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Success - Emerald Green */
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning - Amber Yellow */
+    --warning: 45 93% 63%;
+    --warning-foreground: 0 0% 17%;
+
+    /* Destructive - Bright Red */
+    --destructive: 0 65% 63%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Neutral Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 17%;
+
+    --secondary: 210 14% 97%;
+    --secondary-foreground: 0 0% 17%;
+
+    --muted: 210 14% 97%;
+    --muted-foreground: 215 16% 47%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 17%;
+    --foreground: 0 0% 100%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 17%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 93% 63%;
+    --warning-foreground: 0 0% 17%;
+
+    --destructive: 0 65% 63%;
+    --destructive-foreground: 0 0% 100%;
+
+    --card: 215 28% 17%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 215 28% 17%;
+    --popover-foreground: 0 0% 100%;
+
+    --secondary: 217 19% 27%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217 19% 27%;
+    --muted-foreground: 215 20% 65%;
+
+    --border: 217 19% 27%;
+    --input: 217 19% 27%;
+    --ring: 217 91% 60%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
