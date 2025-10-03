@@ -33,7 +33,6 @@ export default function NotificationsSettingsPage() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [settings, setSettings] = useState<NotificationSettings | null>(null);
   const [slackWebhook, setSlackWebhook] = useState('');
   const [discordWebhook, setDiscordWebhook] = useState('');
   const [emailEnabled, setEmailEnabled] = useState(true);
@@ -44,6 +43,7 @@ export default function NotificationsSettingsPage() {
 
   useEffect(() => {
     fetchSettings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchSettings = async () => {
@@ -53,8 +53,7 @@ export default function NotificationsSettingsPage() {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-      const data = await response.json();
-      setSettings(data);
+      const data: NotificationSettings = await response.json();
       setSlackWebhook(data.slack_webhook || '');
       setDiscordWebhook(data.discord_webhook || '');
       setEmailEnabled(data.email_enabled);
@@ -135,10 +134,11 @@ export default function NotificationsSettingsPage() {
         const error = await response.json();
         throw new Error(error.detail);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       toast({
         title: 'Test Failed',
-        description: error.message || 'Failed to send test notification',
+        description: err.message || 'Failed to send test notification',
         variant: 'destructive',
       });
     }

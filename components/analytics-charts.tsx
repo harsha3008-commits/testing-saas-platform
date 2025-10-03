@@ -2,10 +2,27 @@
 
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
+interface TestTrend {
+  date: string
+  passed: number
+  failed: number
+}
+
+interface CategoryBreakdown {
+  category: string
+  score: number
+}
+
+interface PassRateHistory {
+  name: string
+  value: number
+  [key: string]: string | number
+}
+
 interface AnalyticsChartsProps {
-  testTrends: any[]
-  categoryBreakdown: any[]
-  passRateHistory: any[]
+  testTrends: TestTrend[]
+  categoryBreakdown: CategoryBreakdown[]
+  passRateHistory: PassRateHistory[]
 }
 
 export function AnalyticsCharts({ testTrends, categoryBreakdown, passRateHistory }: AnalyticsChartsProps) {
@@ -54,7 +71,11 @@ export function AnalyticsCharts({ testTrends, categoryBreakdown, passRateHistory
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+              label={(props: { name?: string; percent?: number }) => {
+                const name = props.name || '';
+                const percent = props.percent || 0;
+                return `${name}: ${(percent * 100).toFixed(0)}%`;
+              }}
               outerRadius={100}
               fill="#8884d8"
               dataKey="value"
