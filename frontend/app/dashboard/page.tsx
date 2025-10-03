@@ -27,10 +27,10 @@ export default function DashboardPage() {
           <div>
             <h1 className="text-4xl font-bold mb-2">
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Welcome back
+                Welcome to Lyzo AI
               </span>
             </h1>
-            <p className="text-gray-400">Here's what's happening with your projects</p>
+            <p className="text-gray-400">Your intelligent testing platform dashboard</p>
           </div>
           <Link href="/projects/new">
             <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold">

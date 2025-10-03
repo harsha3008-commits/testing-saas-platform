@@ -9,7 +9,7 @@ export default function Home() {
       <nav className="border-b border-gray-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Testing SaaS
+            Lyzo AI
           </div>
           <div className="flex gap-4">
             <Link href="/dashboard">
@@ -218,7 +218,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Testing SaaS
+              Lyzo AI
             </div>
             <div className="flex gap-8 text-gray-400">
               <Link href="/dashboard" className="hover:text-purple-400 transition-colors">Dashboard</Link>
@@ -228,7 +228,7 @@ export default function Home() {
             </div>
           </div>
           <div className="text-center mt-8 text-gray-600 text-sm">
-            © 2025 Testing SaaS Platform. Built with Next.js and FastAPI.
+            © 2025 Lyzo AI Platform. Built with Next.js and FastAPI.
           </div>
         </div>
       </footer>
